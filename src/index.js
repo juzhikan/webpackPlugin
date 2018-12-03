@@ -1,6 +1,8 @@
 
-function myPlugin () {
+const path = require('path')
 
+function myPlugin () {
+  console.log(__static__)
 }
 
 myPlugin.prototype.apply = function (compiler) {
@@ -13,7 +15,20 @@ myPlugin.prototype.apply = function (compiler) {
 
     for (var asset in compilation.assets) {
       filelist += ('-' + asset + '\n')
+
+
+      let ext = path.extname(asset)
+      let name = path.basename(asset, ext)
+      let dirname = path.dirname(asset)
+
+      console.log('-------ext---------')
+      console.log(ext)
+      console.log('-------name---------')
+      console.log(name)
+      console.log('-------dirname---------')
+      console.log(dirname)
     }
+
 
     compilation.assets['filelist.md'] = {
       source: function() {
